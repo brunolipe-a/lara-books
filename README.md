@@ -12,3 +12,7 @@
 
 - Siga o passo a passo de como iniciar a aplicação, menos último ponto. Todas as configurações feitas no arquivo `.env` agora precisam ser feitas no `.env.test`.
 - Rode todos os testes executando `php artisan test`.
+
+## Como acessar a documentação?
+
+Instale o Insomnia e importe o arquivo da raiz do projeto que inicia com `Insomnia-*.json`.
