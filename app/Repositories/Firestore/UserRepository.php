@@ -19,6 +19,11 @@ class UserRepository
         $this->collection = $this->firestore->database()->collection('users');
     }
 
+    public function query()
+    {
+        return $this->collection;
+    }
+
     public function all()
     {
         return collect($this->collection->documents()->rows());

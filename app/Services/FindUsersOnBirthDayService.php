@@ -13,7 +13,13 @@ class FindUsersOnBirthDayService
 
     public function handle()
     {
-        $users = $this->userRepository->all();
+        $users = collect(
+            $this->userRepository
+                ->query()
+                ->where('is_active', '=', true)
+                ->documents()
+                ->rows(),
+        );
 
         return $users->filter(fn($user) => $this->isSameDayAndMonthToday($user->data()['birthday']));
     }
