@@ -3,8 +3,6 @@
 namespace Tests\Utils\Firestore;
 
 use Kreait\Firebase\Contract\Firestore;
-use Tests\Utils\Firestore\Faker\FirestoreFaker;
-use Tests\Utils\Firestore\Faker\ReaderFaker;
 
 class FirestoreHelper
 {
@@ -21,7 +19,7 @@ class FirestoreHelper
     {
         $documents = $this->firestore
             ->database()
-            ->collection('readers')
+            ->collection($name)
             ->documents();
 
         foreach ($documents as $document) {

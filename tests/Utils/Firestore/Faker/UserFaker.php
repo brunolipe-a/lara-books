@@ -2,9 +2,9 @@
 
 namespace Tests\Utils\Firestore\Faker;
 
-class ReaderFaker extends FirestoreFaker
+class UserFaker extends FirestoreFaker
 {
-    const COLLECTION = 'readers';
+    const COLLECTION = 'users';
 
     public static function make(array $mergeData = []): array
     {

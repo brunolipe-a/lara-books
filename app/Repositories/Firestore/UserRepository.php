@@ -10,13 +10,13 @@ use Google\Cloud\Firestore\DocumentSnapshot;
 use Illuminate\Support\Facades\Hash;
 use Kreait\Firebase\Contract\Firestore;
 
-class ReaderRepository
+class UserRepository
 {
     protected CollectionReference $collection;
 
     public function __construct(protected Firestore $firestore)
     {
-        $this->collection = $this->firestore->database()->collection('readers');
+        $this->collection = $this->firestore->database()->collection('users');
     }
 
     public function all()
@@ -26,13 +26,13 @@ class ReaderRepository
 
     public function findById(string $id)
     {
-        $reader = $this->collection->document($id)->snapshot();
+        $user = $this->collection->document($id)->snapshot();
 
-        if (!$reader->exists()) {
+        if (!$user->exists()) {
             throw new DocumentNotFoundException();
         }
 
-        return $reader;
+        return $user;
     }
 
     public function create(array $data): DocumentSnapshot
