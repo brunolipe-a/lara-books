@@ -10,6 +10,5 @@
 
 ## Como rodar os testes?
 
-- Siga o passo a de como iniciar a aplicação, menos último ponto.
-- Todas as configurações feitas no arquivo `.env` agora precisam ser feitas no `.env.test`.
+- Siga o passo a passo de como iniciar a aplicação, menos último ponto. Todas as configurações feitas no arquivo `.env` agora precisam ser feitas no `.env.test`.
 - Rode todos os testes executando `php artisan test`.
