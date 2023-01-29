@@ -3,46 +3,32 @@
 namespace Tests\Utils\Firestore;
 
 use Kreait\Firebase\Contract\Firestore;
+use Tests\Utils\Firestore\Faker\BookFaker;
+use Tests\Utils\Firestore\Faker\UserFaker;
 
 class FirestoreHelper
 {
-    public static function new(Firestore $firestore)
-    {
-        return new self($firestore);
-    }
-
     public function __construct(protected Firestore $firestore)
     {
     }
 
-    public function deleteCollection(string $name)
+    public function truncateDatabase()
     {
-        $documents = $this->firestore
-            ->database()
-            ->collection($name)
+        $users = UserFaker::factory()
+            ->collection()
             ->documents();
 
-        foreach ($documents as $document) {
-            $document->reference()->delete();
-        }
-    }
+        foreach ($users as $user) {
+            $books = BookFaker::factory()
+                ->user($user->id())
+                ->collection()
+                ->documents();
 
-    public function createMany(string $faker, int $count)
-    {
-        for ($i = 0; $i < $count; $i++) {
-            $this->firestore
-                ->database()
-                ->collection($faker::COLLECTION)
-                ->add($faker::make());
-        }
-    }
+            foreach ($books as $book) {
+                $book->reference()->delete();
+            }
 
-    public function create(string $faker)
-    {
-        return $this->firestore
-            ->database()
-            ->collection($faker::COLLECTION)
-            ->add($faker::make())
-            ->snapshot();
+            $user->reference()->delete();
+        }
     }
 }

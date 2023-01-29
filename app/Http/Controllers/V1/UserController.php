@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Repositories\Firestore\UserRepository;
+use Illuminate\Support\Facades\Cache;
 
 class UserController extends Controller
 {
@@ -51,6 +52,8 @@ class UserController extends Controller
         $user = $this->userRepository->findById($id);
 
         $user->reference()->delete();
+
+        Cache::deleteMultiple(["user-{$user->id()}-books-counter", "user-{$user->id()}-pages-counter"]);
 
         return response()->noContent();
     }
